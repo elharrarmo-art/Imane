@@ -1,8 +1,10 @@
+```html
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Question spéciale ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Soumaya ❤️</title>
 
     <style>
         body {
@@ -20,12 +22,20 @@
         .container {
             color: white;
             max-width: 700px;
+            padding: 20px;
         }
 
         h1 {
-            font-size: 28px;
-            margin-bottom: 40px;
+            font-size: 30px;
+            margin-bottom: 45px;
             line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
         }
 
         button {
@@ -35,36 +45,51 @@
             border-radius: 30px;
             cursor: pointer;
             transition: 0.3s;
-            position: absolute;
         }
 
         #oui {
-            position: static;
             background-color: #4CAF50;
             color: white;
+            position: static;
+        }
+
+        #oui:hover {
+            transform: scale(1.1);
+            background-color: #45a049;
         }
 
         #non {
             background-color: #f44336;
             color: white;
+            position: fixed;
         }
 
-        /* Message plein écran */
+        /* Message après "Oui" */
         .love-message {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+
+            background: linear-gradient(
+                135deg,
+                rgba(255, 117, 140, 0.97),
+                rgba(255, 126, 179, 0.97)
+            );
+
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 40px;
+
+            font-size: 42px;
+            font-weight: bold;
             text-align: center;
+
             opacity: 0;
             visibility: hidden;
+
             transition: 0.5s;
             flex-direction: column;
         }
@@ -75,57 +100,174 @@
             animation: zoom 0.8s ease;
         }
 
+        .heart {
+            font-size: 70px;
+            animation: heartbeat 1s infinite;
+        }
+
         @keyframes zoom {
-            from { transform: scale(0.5); }
-            to { transform: scale(1); }
+            from {
+                transform: scale(0.5);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.25);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
+
         <h1>
-            Hbiba imane ana mohamed, j'ai une question... ❤️ <br><br>
-            Tu m’aimes ? 😏 <br><br>
-            J’ai tout fait pour que tu n’arrives jamais à cliquer sur non hahaha 😈
+            Soumaya ❤️<br><br>
+
+            I have a very important question for you... 😏<br><br>
+
+            Do you love me? ❤️<br><br>
+
+            J'ai tout fait pour que tu n'arrives jamais à cliquer sur
+            <strong>NO</strong> hahaha 😈
         </h1>
 
-        <button id="oui">Oui ❤️</button>
-        <button id="non">Non 😅</button>
+        <div class="buttons">
+
+            <button id="oui">
+                YES ❤️
+            </button>
+
+            <button id="non">
+                NO 😅
+            </button>
+
+        </div>
+
     </div>
+
 
     <!-- Message romantique -->
+
     <div id="loveMessage" class="love-message">
-        💖💖💖<br>
-        O ana knmout 3lik hbiba 😍❤️🔥<br>
-        💕💕💕
+
+        <div class="heart">
+            ❤️
+        </div>
+
+        <div>
+            Hta ana knbghiik bb ❤️
+        </div>
+
+        <div class="heart">
+            💕
+        </div>
+
     </div>
 
+
     <script>
+
         const nonBtn = document.getElementById("non");
         const ouiBtn = document.getElementById("oui");
         const loveMessage = document.getElementById("loveMessage");
 
-        function moveButton() {
-            const maxX = window.innerWidth - nonBtn.offsetWidth;
-            const maxY = window.innerHeight - nonBtn.offsetHeight;
 
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
+        /*
+         * Make the NO button impossible to click.
+         */
+
+        function moveButton() {
+
+            const maxX =
+                window.innerWidth - nonBtn.offsetWidth - 10;
+
+            const maxY =
+                window.innerHeight - nonBtn.offsetHeight - 10;
+
+
+            const randomX =
+                Math.max(10, Math.random() * maxX);
+
+            const randomY =
+                Math.max(10, Math.random() * maxY);
+
 
             nonBtn.style.left = randomX + "px";
+
             nonBtn.style.top = randomY + "px";
-            nonBtn.style.transform = "rotate(" + (Math.random() * 360) + "deg)";
+
+
+            const rotation =
+                (Math.random() * 60) - 30;
+
+            nonBtn.style.transform =
+                "rotate(" + rotation + "deg)";
         }
 
-        nonBtn.addEventListener("mouseover", moveButton);
-        nonBtn.addEventListener("click", moveButton);
+
+        /*
+         * Move when Soumaya tries to approach/click NO.
+         */
+
+        nonBtn.addEventListener(
+            "mouseenter",
+            moveButton
+        );
+
+        nonBtn.addEventListener(
+            "mouseover",
+            moveButton
+        );
+
+        nonBtn.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+                moveButton();
+
+            }
+        );
+
+
+        /*
+         * Initial position.
+         */
+
         moveButton();
 
-        ouiBtn.addEventListener("click", function() {
-            loveMessage.classList.add("show");
-        });
+
+        /*
+         * YES button.
+         */
+
+        ouiBtn.addEventListener(
+            "click",
+            function() {
+
+                loveMessage.classList.add("show");
+
+            }
+        );
+
     </script>
 
 </body>
 </html>
+```
